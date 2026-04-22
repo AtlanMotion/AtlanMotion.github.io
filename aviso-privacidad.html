@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ATLANMOTION - Aviso de Privacidad</title>
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="stylesheet" href="css/estilos.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <div id="header-placeholder"></div>
+
+  <main class="contenedor-aviso">
+    <div class="aviso-card">
+      <div class="aviso-icono">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <h1 class="aviso-titulo">Aviso de Privacidad</h1>
+      <p class="aviso-fecha">Última actualización: Abril 2026</p>
+
+      <div class="aviso-contenido">
+        <p>En <strong>AtlanMotion</strong> respetamos tu privacidad. Este sitio web <strong>no recolecta ni almacena tus datos personales</strong>.</p>
+
+        <p>Al utilizar nuestros enlaces de contacto a <strong>WhatsApp o Instagram</strong>, la información que compartas (como tu número o perfil) será tratada únicamente para:</p>
+        <ul>
+          <li>Darte atención personalizada</li>
+          <li>Responder tus dudas y consultas</li>
+          <li>Brindarte información sobre nuestros servicios</li>
+        </ul>
+
+        <p><strong>No compartimos tu información con terceros.</strong> El uso de estas plataformas (WhatsApp e Instagram) se rige por las políticas de privacidad de <strong>Meta</strong>.</p>
+
+        <p>Si tienes alguna pregunta sobre este aviso de privacidad, puedes contactarnos a través de nuestros canales oficiales.</p>
+      </div>
+
+      <div class="aviso-footer">
+        <a href="/contacto.html" class="btn-aviso">Contactar</a>
+        <a href="/index.html" class="btn-aviso btn-aviso--secundario">Volver al inicio</a>
+      </div>
+    </div>
+  </main>
+
+  <canvas id="bg-waves"></canvas>
+
+  <style>
+    .contenedor-aviso {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+      min-height: calc(100vh - 200px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .aviso-card {
+      background-color: #2a2a2a;
+      border-radius: 24px;
+      padding: 3rem 2rem;
+      border: 1px solid rgba(254, 209, 56, 0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .aviso-icono {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .aviso-icono i {
+      font-size: 60px;
+      color: var(--color-secondary);
+    }
+
+    .aviso-titulo {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      color: var(--color-white);
+    }
+
+    .aviso-fecha {
+      text-align: center;
+      color: var(--color-gray);
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+    }
+
+    .aviso-contenido {
+      text-align: left;
+    }
+
+    .aviso-contenido p {
+      margin-bottom: 1.2rem;
+      line-height: 1.6;
+      color: #e0e0e0;
+    }
+
+    .aviso-contenido ul {
+      margin: 1rem 0 1.5rem 2rem;
+    }
+
+    .aviso-contenido li {
+      margin-bottom: 0.5rem;
+      color: #e0e0e0;
+      line-height: 1.5;
+    }
+
+    .aviso-contenido strong {
+      color: var(--color-secondary);
+    }
+
+    .aviso-footer {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-aviso {
+      display: inline-block;
+      padding: 0.8rem 1.8rem;
+      background-color: var(--color-secondary);
+      color: var(--color-primary);
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-aviso:hover {
+      background-color: #e5be30;
+      transform: translateY(-2px);
+    }
+
+    .btn-aviso--secundario {
+      background-color: transparent;
+      border: 2px solid var(--color-secondary);
+      color: var(--color-secondary);
+    }
+
+    .btn-aviso--secundario:hover {
+      background-color: var(--color-secondary);
+      color: var(--color-primary);
+    }
+
+    @media (max-width: 768px) {
+      .contenedor-aviso {
+        padding: 2rem 1rem;
+      }
+
+      .aviso-card {
+        padding: 2rem 1.5rem;
+      }
+
+      .aviso-titulo {
+        font-size: 1.5rem;
+      }
+
+      .aviso-footer {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-aviso {
+        width: 100%;
+        max-width: 250px;
+        text-align: center;
+      }
+    }
+  </style>
+
+  <script src="js/scripts.js"></script>
+</body>
+
+</html>

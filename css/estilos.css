@@ -1,4 +1,4 @@
-/* ===== EFECTOS DE REVEAL - MOVIDOS AL PRINCIPIO PARA EVITAR FOUC ===== */
+/* ===== EFECTOS DE REVEAL ===== */
 @keyframes autoReveal {
   0% {
     opacity: 0;
@@ -47,25 +47,23 @@
   }
 }
 
-/* ===== VARIABLES Y CONFIGURACIÓN GLOBAL OPTIMIZADA ===== */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== VARIABLES ===== */
 :root {
-  /* Colores principales - eliminado duplicado */
   --color-primary: #323433;
   --color-secondary: #fed138;
-
-  /* Escala de grises */
   --color-gray: #b1b1b1;
   --color-light-gray: #d9d9d9;
   --color-dark: #2a2a2a;
-
-  /* Colores básicos */
   --color-white: #ffffff;
   --color-black: #000000;
-
-  /* Tipografía */
-  --font-montserrat: "Montserrat", sans-serif;
-
-  /* Escala tipográfica optimizada */
+  --font-montserrat: "Montserrat", "Inter", system-ui, -apple-system, sans-serif;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -74,10 +72,8 @@
   --font-size-xl: 1.5rem;
   --font-size-2xl: 1.875rem;
   --font-size-3xl: 2.25rem;
-  --font-size-4xl: 3rem;
-  --font-size-5xl: 3.75rem;
-
-  /* Pesos tipográficos */
+  --font-size-4xl: 2.875rem;
+  --font-size-5xl: 3.0rem;
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
@@ -85,24 +81,18 @@
   --font-weight-bold: 700;
   --font-weight-extrabold: 800;
   --font-weight-black: 900;
-
-  /* Alturas de línea */
   --line-height-tight: 1.1;
   --line-height-normal: 1.4;
   --line-height-relaxed: 1.6;
-
-  /* Espaciado tipográfico */
   --letter-spacing-tight: -0.03em;
   --letter-spacing-normal: 0.01em;
   --letter-spacing-wide: 0.05em;
   --letter-spacing-ultrawide: 0.1em;
-
-  /* Utilidades */
   --border-radius: 20px;
   --transition: all 0.3s ease;
 }
 
-/* ===== RESET Y CONFIGURACIÓN BASE OPTIMIZADA ===== */
+/* ===== RESET ===== */
 *,
 *::before,
 *::after {
@@ -141,7 +131,7 @@ html {
   font-size: 16px;
 }
 
-/* Estados iniciales para elementos animados - PREVIENE FOUC */
+/* Estados iniciales para animados */
 .hero-section>*,
 .seccion-hero-rutinas>*,
 .hero-retos>*,
@@ -150,17 +140,14 @@ html {
   opacity: 0;
 }
 
-.bg-video {
+#bg-waves {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  object-fit: cover;
   z-index: -1;
   pointer-events: none;
-  mix-blend-mode: screen;
-  opacity: 0.8;
 }
 
 body {
@@ -171,15 +158,7 @@ body {
   letter-spacing: var(--letter-spacing-normal);
   color: var(--color-white);
   padding-top: 100px;
-
-  /* Gradiente de respaldo */
-  background: linear-gradient(125deg,
-      #1c1d1c 0%,
-      #232423 25%,
-      #2a2a2a 50%,
-      #232423 75%,
-      #1c1d1c 100%);
-
+  background: linear-gradient(125deg, #1c1d1c 0%, #232423 25%, #2a2a2a 50%, #232423 75%, #1c1d1c 100%);
   position: relative;
   overflow-x: hidden;
 }
@@ -192,21 +171,17 @@ body::before {
   width: 100%;
   height: 100%;
   background: rgba(60, 60, 60, 0.3);
-  /* Fondo gris */
   z-index: -2;
   pointer-events: none;
 }
 
-/* Asegurar que el header y contenido estén por encima */
 .header,
 .content {
   position: relative;
   z-index: 1;
 }
 
-/* ===== SISTEMA TIPOGRÁFICO UNIFICADO Y OPTIMIZADO ===== */
-
-/* Base tipográfica común */
+/* ===== TIPOGRAFÍA ===== */
 .titulo-base {
   font-family: var(--font-montserrat);
   color: var(--color-white);
@@ -223,7 +198,6 @@ body::before {
   margin-bottom: 1rem;
 }
 
-/* Jerarquía de encabezados optimizada */
 h1,
 .h1,
 .hero-title,
@@ -269,7 +243,6 @@ h3,
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-2xl);
   letter-spacing: var(--letter-spacing-normal);
-  text-transform: uppercase;
   margin-bottom: 1rem;
 }
 
@@ -301,7 +274,6 @@ h6,
   margin-bottom: 0.5rem;
 }
 
-/* Textos de cuerpo optimizados */
 p,
 .benefit-description,
 .texto-contacto,
@@ -328,7 +300,6 @@ p,
   font-size: var(--font-size-md);
 }
 
-/* Textos pequeños */
 .text-sm,
 .producto-info .descripcion,
 .pie-imagen,
@@ -340,7 +311,6 @@ p,
   line-height: var(--line-height-normal);
 }
 
-/* Textos grandes */
 .text-lg,
 .hero-subtitle,
 .section-subtitle {
@@ -349,7 +319,6 @@ p,
   line-height: var(--line-height-relaxed);
 }
 
-/* Elementos destacados */
 .texto-destacado,
 .detalle-item strong,
 .producto-info .precio,
@@ -364,7 +333,7 @@ p,
   letter-spacing: var(--letter-spacing-wide);
 }
 
-/* Botones unificados optimizados */
+/* ===== BOTONES ===== */
 .cta-button,
 .boton-contacto,
 .boton-comprar,
@@ -388,7 +357,6 @@ p,
   text-transform: uppercase;
 }
 
-/* Navegación optimizada */
 .nav__link {
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-base);
@@ -397,7 +365,7 @@ p,
   text-transform: uppercase;
 }
 
-/* ===== RESPONSIVE TIPOGRÁFICO OPTIMIZADO ===== */
+/* ===== RESPONSIVE TIPOGRÁFICO ===== */
 @media (max-width: 1024px) {
   :root {
     --font-size-5xl: 3rem;
@@ -440,7 +408,7 @@ p,
   }
 }
 
-/* ===== UTILIDADES GLOBALES OPTIMIZADAS ===== */
+/* ===== UTILIDADES ===== */
 body[not-scroll="true"] {
   overflow: hidden;
 }
@@ -461,41 +429,7 @@ a {
   padding: 0 1rem;
 }
 
-/* ===== COMPONENTES REUTILIZABLES OPTIMIZADOS ===== */
-.btnCirculo,
-.btnCirculo-intermedios {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: transparent;
-  border: 2px solid var(--color-gray);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: var(--transition);
-  margin-top: 2rem;
-  text-decoration: none;
-}
-
-.btnCirculo:hover,
-.btnCirculo-intermedios:hover {
-  background-color: var(--color-secondary);
-  border-color: var(--color-secondary);
-  transform: translateY(3px);
-}
-
-.flecha {
-  width: 20px;
-  height: 20px;
-  color: var(--color-gray);
-  transition: var(--transition);
-}
-
-.btnCirculo:hover .flecha,
-.btnCirculo-intermedios:hover .flecha {
-  color: var(--color-primary);
-}
+/* ===== COMPONENTES ===== */
 
 .section-title {
   margin-bottom: 1rem;
@@ -513,7 +447,7 @@ a {
   margin-right: auto;
 }
 
-/* ===== HEADER Y NAVEGACIÓN CORREGIDA PARA JS ===== */
+/* ===== HEADER ===== */
 .header {
   width: 100%;
   height: 100px;
@@ -556,7 +490,6 @@ a {
   padding: 5px 0;
 }
 
-/* Logo activo en inicio y al hacer hover */
 .inicio .header__logo,
 .header__logo:hover {
   background-image: url("../img/logo-am-amarillo.png");
@@ -612,7 +545,7 @@ a {
   width: 100%;
 }
 
-/* ===== MENÚ HAMBURGUESA CORREGIDO - CENTRADO ===== */
+/* ===== MENÚ HAMBURGUESA ===== */
 .nav__toggle {
   display: none;
 }
@@ -658,7 +591,6 @@ a {
   opacity: 0;
 }
 
-/* Estado cuando el menú está abierto - controlado por JS */
 .menu-open .nav__menu-icon {
   display: none;
   opacity: 0;
@@ -694,9 +626,6 @@ a {
   transform: scale(1.05);
 }
 
-/* ===== CORRECCIONES CRÍTICAS PARA EL PROBLEMA DEL "RASGO FANTASMA" ===== */
-
-/* Estado por defecto para desktop - Asegurar que el menú hamburguesa esté oculto */
 @media (min-width: 951px) {
   .nav__hamburger {
     display: none !important;
@@ -713,12 +642,10 @@ a {
     width: auto !important;
     background: transparent !important;
     backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
     transition: none !important;
   }
 }
 
-/* ===== MEDIA QUERIES HEADER CORREGIDAS - CENTRADO PERFECTO ===== */
 @media (max-width: 950px) {
   .header {
     height: 100px;
@@ -727,7 +654,6 @@ a {
 
   .header__container {
     padding: 0 20px;
-    /* CAMBIO CRÍTICO: Usar Grid para centrado perfecto */
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
@@ -741,13 +667,11 @@ a {
     min-width: 100px;
     height: 40px;
     justify-self: start;
-    /* Logo a la izquierda */
   }
 
   .nav__hamburger {
     display: flex !important;
     justify-self: end;
-    /* Hamburger a la derecha */
     opacity: 1;
     visibility: visible;
   }
@@ -755,7 +679,6 @@ a {
   .header__social {
     display: flex !important;
     justify-self: center;
-    /* Social en el centro exacto */
     margin-left: 0;
   }
 
@@ -766,7 +689,11 @@ a {
 
   .nav__list {
     position: fixed;
-    background: var(--color-primary);
+    background: rgba(50, 52, 51, 0.95);
+    /* ← Translúcido como el header */
+    backdrop-filter: blur(10px);
+    /* ← Mismo efecto que el header */
+    -webkit-backdrop-filter: blur(10px);
     top: 100px;
     left: 0;
     width: 100%;
@@ -777,8 +704,6 @@ a {
     margin: 0;
     overflow-y: auto;
     backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    /* Estado inicial - oculto desde arriba */
     transform: translateY(-100%);
     opacity: 0;
     visibility: hidden;
@@ -861,7 +786,7 @@ a {
   }
 }
 
-/* ===== ESTILOS COMUNES DE BOTONES OPTIMIZADOS ===== */
+/* ===== BOTONES COMUNES ===== */
 .cta-button,
 .boton-contacto,
 .boton-comprar,
@@ -884,10 +809,10 @@ a {
 .boton-rutina:hover {
   background-color: var(--color-secondary);
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px rgba(254, 209, 56, 0.3);
 }
 
-/* ===== ESTILOS COMUNES DE CARDS OPTIMIZADOS ===== */
+/* ===== CARDS ===== */
 .benefit-card,
 .expert-card,
 .testimonial-card {
@@ -906,23 +831,7 @@ a {
   transform: translateZ(0);
 }
 
-.benefit-card:hover,
-.expert-card:hover,
-.testimonial-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  border-color: rgba(254, 209, 56, 0.3);
-}
-
-/* ===== ANIMACIONES COMUNES OPTIMIZADAS ===== */
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ===== PRINT STYLES ===== */
+/* ===== PRINT ===== */
 @media print {
 
   .header,
@@ -937,17 +846,13 @@ a {
 }
 
 /* =========================================================
-   Página: Inicio - INTEGRADO CON FONDO GLOBAL
+   PÁGINA: INICIO
    ========================================================= */
-
 .inicio {
   background-color: transparent;
   position: relative;
 }
 
-/* HERO SECTION - IMAGEN QUE ABARCA TODA LA SECCIÓN */
-
-/* O si prefieres que el contenido tenga un ancho máximo pero el fondo sea completo: */
 .hero-section {
   background-image: url("../img/inicio_hero.png");
   background-size: cover;
@@ -955,9 +860,7 @@ a {
   background-repeat: no-repeat;
   background-color: var(--color-primary);
   width: 100vw;
-  /* Viewport width completo */
   margin-left: calc(-50vw + 50%);
-  /* Truco para centrar con ancho completo */
   margin-right: calc(-50vw + 50%);
   display: grid;
   grid-template-columns: 1fr;
@@ -970,16 +873,12 @@ a {
   padding: 2rem 0;
 }
 
-/* Overlay sutil para el hero para mejor contraste del texto */
 .hero-section::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
-  background: linear-gradient(135deg,
-      rgba(37, 38, 37, 0.3) 0%,
-      rgba(42, 42, 42, 0.2) 50%,
-      rgba(37, 38, 37, 0.3) 100%);
+  background: linear-gradient(135deg, rgba(37, 38, 37, 0.3) 0%, rgba(42, 42, 42, 0.2) 50%, rgba(37, 38, 37, 0.3) 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -1011,8 +910,9 @@ a {
   z-index: 2;
 }
 
-/* BENEFITS SECTION - USA FONDO GLOBAL CON OVERLAY */
-.benefits-section {
+.benefits-section,
+.experts-section,
+.testimonial-section {
   background-color: transparent;
   padding: 4rem 0;
   text-align: center;
@@ -1020,7 +920,6 @@ a {
   z-index: 1;
 }
 
-/* Overlay para las secciones que usan el fondo global */
 .benefits-section::before,
 .experts-section::before,
 .testimonial-section::before {
@@ -1032,25 +931,6 @@ a {
   height: 100%;
   pointer-events: none;
   z-index: 0;
-}
-
-/* Línea decorativa entre secciones */
-.benefits-section::after,
-.experts-section::after,
-.testimonial-section::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  max-width: 400px;
-  height: 1px;
-  background: linear-gradient(90deg,
-      transparent,
-      var(--color-secondary),
-      transparent);
-  z-index: 2;
 }
 
 .benefits-grid {
@@ -1067,7 +947,6 @@ a {
   background-color: rgba(62, 63, 62, 0.85);
   border-radius: 20px;
   padding: 2rem 1rem;
-  text-align: center;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -1076,13 +955,11 @@ a {
   align-items: center;
   justify-content: center;
   height: 100%;
-  box-sizing: border-box;
   min-height: 220px;
   position: relative;
   overflow: hidden;
 }
 
-/* Efecto de brillo en hover para las cards */
 .benefit-card::before {
   content: '';
   position: absolute;
@@ -1090,10 +967,7 @@ a {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(254, 209, 56, 0.1),
-      transparent);
+  background: linear-gradient(90deg, transparent, rgba(254, 209, 56, 0.1), transparent);
   transition: left 0.6s ease;
 }
 
@@ -1103,9 +977,7 @@ a {
 
 .benefit-card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow:
-    0 15px 30px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(254, 209, 56, 0.2);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(254, 209, 56, 0.2);
   border-color: rgba(254, 209, 56, 0.4);
   background-color: rgba(62, 63, 62, 0.95);
 }
@@ -1133,15 +1005,6 @@ a {
   z-index: 2;
 }
 
-/* EXPERTS SECTION - USA FONDO GLOBAL */
-.experts-section {
-  background-color: transparent;
-  padding: 4rem 0;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-
 .experts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1162,47 +1025,11 @@ a {
   align-items: center;
   justify-content: center;
   min-height: 120px;
-  box-sizing: border-box;
   border: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
 }
 
-.expert-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at center,
-      rgba(254, 209, 56, 0.1) 0%,
-      transparent 70%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.expert-card:hover::before {
-  opacity: 1;
-}
-
-.expert-card:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow:
-    0 10px 25px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(254, 209, 56, 0.2);
-  border-color: rgba(254, 209, 56, 0.3);
-  background-color: rgba(50, 52, 51, 0.95);
-}
-
-/* TESTIMONIAL SECTION - USA FONDO GLOBAL */
-.testimonial-section {
-  background-color: transparent;
-  padding: 4rem 0;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
 
 .testimonials-grid {
   display: grid;
@@ -1218,45 +1045,15 @@ a {
   background-color: rgba(62, 63, 62, 0.85);
   border-radius: 20px;
   padding: 2rem 1.5rem;
-  position: relative;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-sizing: border-box;
   height: 100%;
   min-height: 320px;
-  position: relative;
   overflow: hidden;
-}
-
-.testimonial-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(254, 209, 56, 0.08),
-      transparent);
-  transition: left 0.6s ease;
-}
-
-.testimonial-card:hover::before {
-  left: 100%;
-}
-
-.testimonial-card:hover {
-  transform: translateY(-5px);
-  box-shadow:
-    0 15px 30px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(254, 209, 56, 0.15);
-  border-color: rgba(254, 209, 56, 0.3);
-  background-color: rgba(62, 63, 62, 0.95);
 }
 
 .testimonial-text {
@@ -1281,7 +1078,7 @@ a {
   flex-shrink: 0;
   position: relative;
   z-index: 2;
-  border: 2px solid rgba(254, 209, 56, 0.3);
+  border: 1px solid rgba(254, 209, 56, 0.2);
 }
 
 .testimonial-image img {
@@ -1298,7 +1095,6 @@ a {
 
   .benefits-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
   }
 
   .testimonials-grid {
@@ -1353,11 +1149,12 @@ a {
 }
 
 /* =========================================================
-   Página: Contacto
+   PÁGINA: CONTACTO
    ========================================================= */
-
 .contenedor-contacto {
   width: 100%;
+  max-width: 1200px;
+  /* ← AÑADIR: Limita el ancho */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -1365,6 +1162,8 @@ a {
   align-items: center;
   padding: 2rem 1rem;
   text-align: center;
+  margin: 0 auto;
+  /* ← AÑADIR: Centra horizontalmente */
 }
 
 .imagen-contacto {
@@ -1373,8 +1172,6 @@ a {
   margin-bottom: 1.5rem;
   display: block;
 }
-
-
 
 .boton-contacto {
   display: inline-block;
@@ -1409,7 +1206,7 @@ a {
   padding: 2rem;
   background-color: var(--color-dark);
   border-radius: 12px;
-  border: 2px solid var(--color-secondary);
+  border: 1px solid rgba(254, 209, 56, 0.2);
 }
 
 .detalles-contacto {
@@ -1430,32 +1227,31 @@ a {
 }
 
 /* Animaciones Contacto */
-.imagen-contacto {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease 0.2s forwards;
-}
-
-.texto-contacto {
-  max-width: 600px;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease 0.4s forwards;
-}
-
-.boton-contacto {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease 0.6s forwards;
-}
-
+.imagen-contacto,
+.texto-contacto,
+.boton-contacto,
 .info-adicional {
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeInUp 0.6s ease 0.8s forwards;
+  animation: fadeInUp 0.6s ease forwards;
 }
 
-/* RESPONSIVE CONTACTO */
+.imagen-contacto {
+  animation-delay: 0.2s;
+}
+
+.texto-contacto {
+  animation-delay: 0.4s;
+}
+
+.boton-contacto {
+  animation-delay: 0.6s;
+}
+
+.info-adicional {
+  animation-delay: 0.8s;
+}
+
 @media (max-width: 480px) {
   .contenedor-contacto {
     padding: 1.5rem 1rem;
@@ -1494,32 +1290,9 @@ a {
   }
 }
 
-/* Accesibilidad Contacto */
-@media (prefers-reduced-motion: reduce) {
-
-  .imagen-contacto,
-  .texto-contacto,
-  .boton-contacto,
-  .info-adicional {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-
-  .boton-contacto:hover {
-    transform: none;
-  }
-}
-
-.boton-contacto:focus {
-  outline: 3px solid var(--color-secondary);
-  outline-offset: 2px;
-}
-
 /* =========================================================
-   Página: Nosotros
+   PÁGINA: NOSOTROS
    ========================================================= */
-
 .seccion-titulo {
   padding: 4rem 1rem 2rem;
   text-align: center;
@@ -1601,12 +1374,8 @@ a {
   padding: 0 1rem;
 }
 
-.texto-bloque p:last-child {
-  margin-bottom: 0;
-}
-
-/* Animaciones Nosotros */
-.texto-bloque {
+.texto-bloque,
+.imagen-contenedor {
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 0.6s ease forwards;
@@ -1632,12 +1401,6 @@ a {
   animation-delay: 0.5s;
 }
 
-.imagen-contenedor {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease forwards;
-}
-
 .imagen-contenedor:nth-child(1) {
   animation-delay: 0.3s;
 }
@@ -1646,7 +1409,6 @@ a {
   animation-delay: 0.5s;
 }
 
-/* RESPONSIVE NOSOTROS */
 @media (max-width: 480px) {
   .seccion-titulo {
     padding: 3rem 1rem 1.5rem;
@@ -1695,29 +1457,9 @@ a {
   }
 }
 
-/* Accesibilidad Nosotros */
-@media (prefers-reduced-motion: reduce) {
-
-  .texto-bloque,
-  .imagen-contenedor,
-  .imagen-nosotros {
-    animation: none;
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
-
-.texto-bloque:focus-within {
-  outline: 2px solid var(--color-secondary);
-  outline-offset: 4px;
-  border-radius: 4px;
-}
-
 /* =========================================================
-   Página: Retos
+   PÁGINA: RETOS
    ========================================================= */
-
 .contenedor-retos {
   width: 100%;
   max-width: 1200px;
@@ -1759,7 +1501,7 @@ a {
   padding: 2.5rem;
   background-color: var(--color-dark);
   border-radius: var(--border-radius);
-  border: 1px solid rgba(254, 209, 56, 0.1);
+  border: 1px solid rgba(254, 209, 56, 0.2);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
@@ -1968,7 +1710,6 @@ a {
   font-weight: var(--font-weight-bold);
 }
 
-/* RESPONSIVE RETOS */
 @media (max-width: 768px) {
   .hero-retos {
     min-height: auto;
@@ -2039,9 +1780,8 @@ a {
 }
 
 /* =========================================================
-   Página: Tienda
+   PÁGINA: TIENDA
    ========================================================= */
-
 .contenedor-tienda {
   width: 100%;
   max-width: 1200px;
@@ -2067,7 +1807,7 @@ a {
   padding: 3rem 2rem;
   margin: 2rem auto;
   max-width: 900px;
-  border: 2px solid var(--color-secondary);
+  border: 1px solid rgba(254, 209, 56, 0.2);
 }
 
 .instrucciones-compra h2 {
@@ -2186,19 +1926,16 @@ a {
   height: 100%;
   background-color: rgba(62, 63, 62, 0.85);
   backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
   z-index: 2000;
   overflow-y: auto;
   padding: 1rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
 }
 
 .n-modal.active {
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 1;
+  animation: modalFadeIn 0.3s ease forwards;
 }
 
 .modal-contenido {
@@ -2213,12 +1950,41 @@ a {
   overflow: hidden;
   max-height: 90vh;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transform: translateY(20px);
-  transition: transform 0.3s ease;
+  animation: modalContentIn 0.3s ease forwards;
 }
 
-.n-modal.active .modal-contenido {
-  transform: translateY(0);
+/* Animación para el botón dentro del modal */
+.modal-contenido .boton-comprar {
+  animation: buttonFadeInUp 0.3s ease 0.1s forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalContentIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes buttonFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (min-width: 768px) {
@@ -2299,7 +2065,6 @@ a {
   width: 40px;
   height: 40px;
   background-color: var(--color-gray);
-  border: 2px solid var(--color-primary);
   border-radius: 50%;
   position: absolute;
   right: 15px;
@@ -2351,7 +2116,6 @@ a {
   margin-top: 2rem;
 }
 
-/* RESPONSIVE TIENDA */
 @media (max-width: 480px) {
   .titulo-tienda {
     padding: 3rem 1rem 1.5rem;
@@ -2447,9 +2211,8 @@ a {
 }
 
 /* =========================================================
-   Página: Rutinas
+   PÁGINA: RUTINAS
    ========================================================= */
-
 .seccion-hero-rutinas {
   width: 100%;
   min-height: 100vh;
@@ -2489,16 +2252,28 @@ a {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }
 
-.seccion-hero-rutinas::after {
+/* Líneas divisorias de rutinas */
+.seccion-hero-rutinas::after,
+.seccion-rutina::before {
   content: '';
   position: absolute;
-  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 80%;
-  max-width: 400px;
-  height: 2px;
+  width: calc(100% - 2rem);
+  max-width: 1200px;
+  height: 5px;
   background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
+  border-radius: 2px;
+}
+
+.seccion-hero-rutinas::after {
+  bottom: 0;
+  top: auto;
+}
+
+.seccion-rutina::before {
+  top: 0;
+  bottom: auto;
 }
 
 .seccion-rutina {
@@ -2507,18 +2282,6 @@ a {
   display: flex;
   align-items: center;
   position: relative;
-}
-
-.seccion-rutina::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  max-width: 400px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
 }
 
 #principiantes::before {
@@ -2661,7 +2424,6 @@ a {
   }
 }
 
-/* RESPONSIVE RUTINAS */
 @media (max-width: 480px) {
   .seccion-hero-rutinas {
     min-height: 90vh;
@@ -2685,11 +2447,6 @@ a {
   .boton-rutina {
     padding: 0.8rem 1.5rem;
     min-width: 200px;
-  }
-
-  .seccion-hero-rutinas::after,
-  .seccion-rutina::before {
-    width: 90%;
   }
 }
 
@@ -2728,26 +2485,37 @@ a {
 }
 
 /* =========================================================
-   Página: Principiantes
+   PÁGINA: PRINCIPIANTES
    ========================================================= */
-
 .header-programa {
   padding: 2rem 0;
   text-align: center;
   position: relative;
 }
 
+/* Ancho completo */
 .header-programa::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  max-width: 400px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #fed138, transparent);
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
 }
+
+.seccion-principiante::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
+}
+
 
 .header-programa .container {
   width: 100%;
@@ -2762,27 +2530,23 @@ a {
   height: auto;
 }
 
+/* Por esto */
 .seccion-principiante {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  min-height: 100vh;
+  min-height: auto;  /* ← Cambiado */
   display: flex;
   align-items: center;
   position: relative;
+  padding: 4rem 0 2rem 0;  /* ← Reduce padding inferior */
 }
 
-.seccion-principiante::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  max-width: 400px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #fed138, transparent);
+/* Específicamente para la última semana (Semana 4) */
+.semana4 {
+  padding-bottom: 0;  /* ← Elimina padding inferior */
 }
+
 
 .semana1::before {
   display: none;
@@ -2947,7 +2711,6 @@ a {
   color: white;
 }
 
-/* RESPONSIVE PRINCIPIANTES */
 @media (min-width: 768px) {
   .grid-container {
     grid-template-columns: 1fr 1fr;
@@ -2982,11 +2745,6 @@ a {
   .navegacion-videos {
     padding: 0 5px;
   }
-
-  .header-programa::after,
-  .seccion-principiante::before {
-    width: 90%;
-  }
 }
 
 @media (max-width: 480px) {
@@ -2996,9 +2754,8 @@ a {
 }
 
 /* =========================================================
-   Página: Intermedios
+   PÁGINA: INTERMEDIOS
    ========================================================= */
-
 .contenedor-principal-intermedios {
   width: 100%;
   min-height: 100vh;
@@ -3048,37 +2805,6 @@ a {
   margin-top: 1rem;
 }
 
-.btnCirculo-intermedios {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: transparent;
-  border: 1px solid var(--color-gray);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: var(--transition);
-  text-decoration: none;
-  margin: 0 auto;
-}
-
-.btnCirculo-intermedios:hover {
-  background-color: var(--color-secondary);
-  border-color: var(--color-secondary);
-  transform: translateY(3px);
-}
-
-.btnCirculo-intermedios .flecha {
-  width: 20px;
-  height: 20px;
-  color: var(--color-gray);
-}
-
-.btnCirculo-intermedios:hover .flecha {
-  color: var(--color-primary);
-}
-
 .seccion-video-intermedios {
   width: 100%;
   min-height: 100vh;
@@ -3109,7 +2835,6 @@ a {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* RESPONSIVE INTERMEDIOS */
 @media (max-width: 768px) {
   .contenedor-principal-intermedios {
     min-height: 80vh;
@@ -3162,7 +2887,7 @@ a {
   }
 }
 
-/* ===== ACCESIBILIDAD Y REDUCED MOTION ===== */
+/* ===== ACCESIBILIDAD ===== */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -3212,30 +2937,19 @@ a {
   border-radius: 4px;
 }
 
-/* Optimización de rendimiento para móviles */
+/* Optimización móvil */
 @media (max-width: 768px) {
   body {
     background-image: none;
-    /* Remover background complejo en móviles */
     background-color: var(--color-primary);
   }
 
-  /* === SOLUCIÓN PARA FONDO BLANCO EN INICIO MÓVIL === */
-  /* Fondo simplificado para móviles - mejor rendimiento */
   .inicio body,
   body.inicio {
-    background-image:
-      linear-gradient(125deg,
-        #1c1d1c 0%,
-        #232423 25%,
-        #2a2a2a 50%,
-        #232423 75%,
-        #1c1d1c 100%);
+    background-image: linear-gradient(125deg, #1c1d1c 0%, #232423 25%, #2a2a2a 50%, #232423 75%, #1c1d1c 100%);
     background-size: 200% 200%;
     animation: flowMove 20s linear infinite;
   }
-
-  /* === FIN SOLUCIÓN === */
 
   .benefit-card,
   .expert-card,
@@ -3245,19 +2959,16 @@ a {
   }
 }
 
-/* ===== APLICACIÓN DE EFECTOS REVEAL OPTIMIZADOS ===== */
-
-/* Hero sections */
+/* ===== EFECTOS REVEAL ===== */
 .hero-section>*,
 .seccion-hero-rutinas>*,
 .hero-retos>*,
 .contenedor-contacto>*,
 .contenedor-principal-intermedios>* {
   animation: autoReveal 0.8s ease forwards;
-  animation-delay: 0.3s;
+  animation-delay: 0.4s;
 }
 
-/* Títulos principales */
 h1,
 .h1,
 .hero-title,
@@ -3267,10 +2978,9 @@ h1,
 .about-title,
 .hero-retos__titulo,
 .reto-integrado__titulo {
-  animation: autoReveal 0.8s ease 0.2s forwards !important;
+  animation: autoReveal 0.8s ease 0.3s forwards !important;
 }
 
-/* Subtítulos y textos */
 h2,
 .h2,
 .section-subtitle,
@@ -3278,77 +2988,70 @@ h2,
 .hero-text,
 .hero-retos__descripcion,
 .texto-descripcion-intermedios {
-  animation: autoReveal 0.8s ease 0.4s forwards !important;
+  animation: autoReveal 0.8s ease 0.5s forwards !important;
 }
 
-/* Botones */
 .cta-button,
 .boton-contacto,
 .boton-comprar,
 .boton-rutina,
 .btn--primario,
 .btn--secundario {
-  animation: autoReveal 0.8s ease 0.6s forwards !important;
+  animation: autoReveal 0.8s ease 0.7s forwards !important;
 }
 
-/* 3. GRIDS Y CARDS CON EFECTO ESCALONADO */
-
-/* Benefits grid */
 .benefits-grid .benefit-card:nth-child(1) {
-  animation: autoReveal 0.8s ease 0.3s forwards;
-}
-
-.benefits-grid .benefit-card:nth-child(2) {
   animation: autoReveal 0.8s ease 0.4s forwards;
 }
 
-.benefits-grid .benefit-card:nth-child(3) {
+.benefits-grid .benefit-card:nth-child(2) {
   animation: autoReveal 0.8s ease 0.5s forwards;
 }
 
-.benefits-grid .benefit-card:nth-child(4) {
+.benefits-grid .benefit-card:nth-child(3) {
   animation: autoReveal 0.8s ease 0.6s forwards;
 }
 
-/* Experts grid */
+.benefits-grid .benefit-card:nth-child(4) {
+  animation: autoReveal 0.8s ease 0.7s forwards;
+}
+
 .experts-grid .expert-card {
   animation: autoReveal 0.8s ease forwards;
 }
 
 .experts-grid .expert-card:nth-child(1) {
-  animation-delay: 0.2s;
-}
-
-.experts-grid .expert-card:nth-child(2) {
   animation-delay: 0.3s;
 }
 
-.experts-grid .expert-card:nth-child(3) {
+.experts-grid .expert-card:nth-child(2) {
   animation-delay: 0.4s;
 }
 
-.experts-grid .expert-card:nth-child(4) {
+.experts-grid .expert-card:nth-child(3) {
   animation-delay: 0.5s;
 }
 
-/* Testimonials grid */
+.experts-grid .expert-card:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
 .testimonials-grid .testimonial-card {
   animation: autoReveal 0.8s ease forwards;
 }
 
 .testimonials-grid .testimonial-card:nth-child(1) {
-  animation-delay: 0.3s;
-}
-
-.testimonials-grid .testimonial-card:nth-child(2) {
   animation-delay: 0.4s;
 }
 
-.testimonials-grid .testimonial-card:nth-child(3) {
-  animation-delay: 0.5s;
+.testimonials-grid .testimonial-card:nth-child(2) {
+  animation-delay: 0.55s;
 }
 
-/* Productos grid */
+.testimonials-grid .testimonial-card:nth-child(3) {
+  animation-delay: 0.7s;
+}
+
 .grid-productos .producto-card {
   animation: autoRevealScale 0.8s ease forwards;
 }
@@ -3365,9 +3068,6 @@ h2,
   animation-delay: 0.5s;
 }
 
-/* 4. SECCIONES ESPECÍFICAS */
-
-/* Sección Nosotros - texto e imágenes alternadas */
 .columna-texto .texto-bloque {
   animation: autoRevealRight 0.8s ease forwards;
 }
@@ -3396,7 +3096,6 @@ h2,
   animation-delay: 0.5s;
 }
 
-/* Sección Rutinas - contenido alternado */
 .grid-rutina .contenido-texto {
   animation: autoRevealLeft 0.8s ease 0.3s forwards;
 }
@@ -3406,7 +3105,6 @@ h2,
   animation: autoRevealRight 0.8s ease 0.4s forwards;
 }
 
-/* 5. ELEMENTOS DE FORMULARIO Y MODALES */
 .instrucciones-compra,
 .reto-integrado,
 .info-adicional,
@@ -3415,7 +3113,6 @@ h2,
   animation: autoRevealScale 0.8s ease 0.3s forwards;
 }
 
-/* 6. IMÁGENES PRINCIPALES */
 .imagen-contacto,
 .hero-retos__imagen,
 .hero-imagen-rutinas,
@@ -3425,7 +3122,6 @@ h2,
   animation: autoRevealScale 0.8s ease 0.2s forwards;
 }
 
-/* 7. NAVEGACIÓN (sutil) */
 .nav__list .nav__item {
   animation: autoReveal 0.6s ease forwards;
 }
@@ -3450,17 +3146,14 @@ h2,
   animation-delay: 0.5s;
 }
 
-/* 8. RESPONSIVE - Optimizar para móviles */
 @media (max-width: 768px) {
 
-  /* Reducir animaciones en móviles para mejor performance */
   .benefits-grid .benefit-card,
   .testimonials-grid .testimonial-card,
   .grid-productos .producto-card {
     animation: autoReveal 0.6s ease 0.3s forwards !important;
   }
 
-  /* Eliminar delays escalonados en móviles para carga más rápida */
   .benefits-grid .benefit-card:nth-child(n),
   .testimonials-grid .testimonial-card:nth-child(n),
   .grid-productos .producto-card:nth-child(n) {
@@ -3468,7 +3161,6 @@ h2,
   }
 }
 
-/* 9. ACCESIBILIDAD - Respetar preferencias de movimiento */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -3506,7 +3198,6 @@ h2,
   }
 }
 
-/* 10. OPTIMIZACIÓN DE RENDIMIENTO */
 @media (max-width: 1024px) {
 
   .benefits-grid .benefit-card,
@@ -3515,7 +3206,6 @@ h2,
   }
 }
 
-/* ===== FALLBACK PARA JAVASCRIPT DESHABILITADO ===== */
 .no-js .hero-section>*,
 .no-js .benefit-card,
 .no-js .testimonial-card,
@@ -3525,4 +3215,213 @@ h2,
   animation: none !important;
   opacity: 1 !important;
   transform: none !important;
+}
+
+/* ===== LÍNEAS INICIO - ALINEADAS CON EL CONTENIDO ===== */
+.benefits-section,
+.experts-section,
+.testimonial-section {
+  position: relative;
+}
+
+.benefits-section::after,
+.experts-section::after,
+.testimonial-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 2rem);
+  max-width: 1200px;
+  height: 5px;
+  background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
+  z-index: 2;
+}
+
+
+/* ===== BOTONES UNIFICADOS CON TEXTO MÁS GRUESO ===== */
+
+/* Botones principales */
+.cta-button,
+.boton-contacto,
+.boton-comprar,
+.boton-rutina,
+.btn-principal,
+.btn--primario {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+  border-radius: 40px;
+  text-align: center;
+  font-weight: 800;
+  /* ← Cambiado: 700 → 800 (más grueso) */
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  min-width: 200px;
+}
+
+/* Botones secundarios */
+.btn-secundario,
+.btn--secundario {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  background-color: transparent;
+  color: var(--color-secondary);
+  border: 2px solid var(--color-secondary);
+  border-radius: 40px;
+  text-align: center;
+  font-weight: 800;
+  /* ← Cambiado: 700 → 800 (más grueso) */
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-width: 200px;
+}
+
+
+/* ===== BOTÓN CÍRCULO - UNIFICADO (funciona en todas las páginas) ===== */
+
+.btnCirculo,
+.btnCirculo-intermedios {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--color-secondary);
+  border: none;
+  /* ← Importante: sin borde gris */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 2rem;
+  text-decoration: none;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btnCirculo:hover,
+.btnCirculo-intermedios:hover {
+  background-color: #e5be30;
+  box-shadow: 0 8px 15px rgba(254, 209, 56, 0.4);
+}
+
+.flecha {
+  width: 28px;
+  height: 28px;
+  stroke-width: 3;
+  color: var(--color-primary);
+  transition: var(--transition);
+}
+
+.btnCirculo:hover .flecha,
+.btnCirculo-intermedios:hover .flecha {
+  color: var(--color-primary);
+}
+
+
+/* ===== TARJETA DE EXPERTO CENTRADA ===== */
+.experts-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.expert-card {
+  max-width: 450px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.expert-specialty {
+  font-weight: 700;
+  /* más grueso */
+  color: var(--color-gray);
+}
+
+/* ===== FONDO DE TARJETAS UNIFICADO ===== */
+.benefit-card,
+.expert-card,
+.testimonial-card {
+  background-color: #2a2a2a !important;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(254, 209, 56, 0.15);
+}
+
+/* Eliminar espacio antes del footer en página de principiantes */
+.seccion-principiante:last-of-type {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.footer {
+  margin-top: 0 !important;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background-color: rgba(50, 52, 51, 0.9);
+  backdrop-filter: blur(5px);
+  border-top: 1px solid rgba(254, 209, 56, 0.2);
+  padding: 1.5rem 1rem;
+  margin-top: 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.footer__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer__text {
+  font-size: 0.875rem;
+  color: var(--color-gray);
+  letter-spacing: 0.5px;
+}
+
+.footer__text a {
+  color: var(--color-secondary);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer__text a:hover {
+  text-decoration: underline;
+}
+
+/* ===== CONTROL DE ANIMACIONES CON LOADER ===== */
+body.loading .hero-section>*,
+body.loading .seccion-hero-rutinas>*,
+body.loading .hero-retos>*,
+body.loading .contenedor-contacto>*,
+body.loading .contenedor-principal-intermedios>*,
+body.loading .benefits-grid .benefit-card,
+body.loading .testimonials-grid .testimonial-card,
+body.loading .grid-productos .producto-card,
+body.loading .columna-texto .texto-bloque,
+body.loading .columna-imagenes .imagen-contenedor,
+body.loading .grid-rutina .contenido-texto,
+body.loading .grid-rutina .contenedor-imagenes,
+body.loading .instrucciones-compra,
+body.loading .reto-integrado,
+body.loading .info-adicional,
+body.loading .imagen-contacto,
+body.loading .hero-retos__imagen,
+body.loading .hero-imagen-rutinas,
+body.loading .imagen-principal-intermedios,
+body.loading .titulo-imagen,
+body.loading .titulo-tienda img {
+  animation: none !important;
+  opacity: 0 !important;
 }

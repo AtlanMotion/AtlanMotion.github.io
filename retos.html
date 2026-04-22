@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet" />
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
 
 <body>
@@ -79,12 +79,19 @@
       <p class="modal__descripcion">Completa cada fase para terminar tu reto</p>
 
       <div class="modal__pasos">
-        <button class="paso" id="paso-1">Calentamiento</button>
-        <button class="paso" id="paso-2" disabled>Rutina de Fuerza</button>
-        <button class="paso" id="paso-3" disabled>Enfriamiento</button>
+        <button class="paso" id="paso-1">
+          <i class="fas fa-fire"></i>&nbsp;&nbsp;&nbsp;Calentamiento
+        </button>
+        <button class="paso" id="paso-2" disabled>
+          <i class="fas fa-dumbbell"></i>&nbsp;&nbsp;&nbsp;Rutina de Fuerza
+        </button>
+        <button class="paso" id="paso-3" disabled>
+          <i class="fas fa-hand-peace"></i>&nbsp;&nbsp;&nbsp;Enfriamiento
+        </button>
       </div>
-
-      <div id="mensaje-completado" class="modal__mensaje">¡Reto completado! 🎉</div>
+      <div id="mensaje-completado" class="modal__mensaje">
+        <i class="fas fa-trophy"></i>&nbsp;&nbsp;&nbsp;¡Reto completado!
+      </div>
       <br>
       <button class="btn btn--primario" id="btn-cerrar-modal">Cerrar</button>
     </div>
@@ -101,12 +108,21 @@
         console.error('Error cargando el header:', error);
       });
 
-    // Lógica del Modal del Reto
+    // ==========================================
+    // Lógica del Modal del Reto (CORREGIDA)
+    // ==========================================
     const modal = document.getElementById('modal-reto');
     const btnComenzar = document.getElementById('btn-comenzar-reto');
     const btnCerrar = document.getElementById('btn-cerrar-modal');
     const pasos = [document.getElementById('paso-1'), document.getElementById('paso-2'), document.getElementById('paso-3')];
     const mensajeCompletado = document.getElementById('mensaje-completado');
+
+    // Textos originales con iconos y espacio
+    const textosOriginales = [
+      '<i class="fas fa-fire"></i>&nbsp;&nbsp;Calentamiento',
+      '<i class="fas fa-dumbbell"></i>&nbsp;&nbsp;Rutina de Fuerza',
+      '<i class="fas fa-hand-peace"></i>&nbsp;&nbsp;Enfriamiento'
+    ];
 
     btnComenzar.addEventListener('click', () => {
       modal.classList.add('modal--activo');
@@ -121,22 +137,32 @@
 
     pasos.forEach((paso, index) => {
       paso.addEventListener('click', () => {
+        // Evita múltiples clics en el mismo paso
+        if (paso.disabled) return;
+
         paso.disabled = true;
-        paso.textContent = `✓ ${paso.textContent} Completado`;
+        // Mantiene el icono y añade el check al inicio
+        paso.innerHTML = `<i class="fas fa-check-circle"></i> ${textosOriginales[index].replace(/<i class="[^"]*"><\/i>/, '').trim()} Completado`;
+
+        // Opción más limpia: cambiar solo el icono
+        // paso.querySelector('i').className = 'fas fa-check-circle';
 
         if (index < pasos.length - 1) {
           pasos[index + 1].disabled = false;
         } else {
           mensajeCompletado.style.opacity = '1';
+          // Oculta el mensaje después de 3 segundos
+          setTimeout(() => {
+            mensajeCompletado.style.opacity = '0';
+          }, 3000);
         }
       });
     });
 
     function reiniciarReto() {
       pasos.forEach((paso, index) => {
-        const textosOriginales = ['Calentamiento', 'Rutina de Fuerza', 'Enfriamiento'];
         paso.disabled = index > 0;
-        paso.textContent = textosOriginales[index];
+        paso.innerHTML = textosOriginales[index];
       });
       mensajeCompletado.style.opacity = '0';
     }
